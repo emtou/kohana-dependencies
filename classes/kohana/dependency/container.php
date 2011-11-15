@@ -74,10 +74,10 @@ class Kohana_Dependency_Container {
 
 			// Run any additional methods required to prepare the object
 			$reflected_instance = new ReflectionClass($instance);
-			foreach ($definition->methods as $method => $args)
+			foreach ($definition->methods as $method)
 			{
-				$args = array_map(array($this, '_resolve_argument'), $args);
-				$reflected_instance->getMethod($method)->invokeArgs($instance, $args);
+				$args = array_map(array($this, '_resolve_argument'), $method[1]);
+				$reflected_instance->getMethod($method[0])->invokeArgs($instance, $args);
 			}
 		}
 		catch (ReflectionException $e)

@@ -127,7 +127,7 @@ class Kohana_Dependency_Definition {
 			$argument = $this->_handle_reference($argument);
 		}
 
-		$this->_methods[$method] = $arguments;
+		$this->_methods[] = array($method, $arguments);
 
 		return $this;
 	}
