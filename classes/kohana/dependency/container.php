@@ -10,7 +10,7 @@ class Kohana_Dependency_Container {
 		$this->_cache       = array();
 		$this->_definitions = $definitions;
 	}
-	
+
 	public function get($key)
 	{
 		// Get an instance from the cache if it's there
@@ -22,16 +22,16 @@ class Kohana_Dependency_Container {
 
 		// Create an instance of the class using the definition
 		$instance = $this->_get_instance($definition);
-		
+
 		// Cache the instance if it is shared
 		if ($definition->is_shared())
 		{
 			$this->_cache($key, $instance);
 		}
-		
+
 		return $instance;
 	}
-	
+
 	protected function _cache($key, $instance = NULL)
 	{
 		// Setter
@@ -47,7 +47,7 @@ class Kohana_Dependency_Container {
 		else
 			return NULL;
 	}
-	
+
 	protected function _get_instance(Dependency_Definition $definition)
 	{
 		// Make sure the class exists
@@ -86,7 +86,7 @@ class Kohana_Dependency_Container {
 				':class' => $definition->class,
 			));
 		}
-		
+
 		return $instance;
 	}
 
@@ -99,4 +99,10 @@ class Kohana_Dependency_Container {
 
 		return $argument;
 	}
+
+	public function set($key, $value)
+	{
+		$this->_cache[$key] = $value;
+	}
+
 }
